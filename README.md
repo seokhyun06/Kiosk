@@ -40,7 +40,7 @@
     	menu_append();
     }
 ```
-메소드를 생성하여 +버튼을 눌렀을 때 countm[n]+1 증가합니다// n == 메뉴 방 번호
+메소드를 생성하여 +버튼을 눌렀을 때 countm[n]+1 증가합니다// n == 메뉴 배열 방 번호
 
 ## [-버튼]
 ``` java
@@ -77,6 +77,7 @@
     }
 ```
 취소버튼을 눌렀을 때 모든 변수방, 합계 금액이 나오는 화면 초기화를 합니다
+
 ## [sum 버튼]
 ``` java
     @FXML
@@ -85,7 +86,39 @@
     	sumLabel.setText(sum + "");
     }
 ```
-sum은 정수형인데 sumtext가 문자형이기 때문에 ""를 추가해 문자형으로 바뀐다.
+sum은 정수형인데 sumLabel이 문자형이기 때문에 ""를 추가해 문자형으로 바뀐다.
+
+
+## [DB 접속 클래스]
+``` java
+package application;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBconnect3 {
+	public Connection conn;
+ 
+	public Connection getConnection() {
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String id = "cafe3";
+		String password = "cafe3";
+		
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, id, password);
+			System.out.println("DB 접속 성공");
+   
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB 접속 실패");
+		}
+		return conn;	
+	}
+}
+```
+try-catch문으로 출력문 DB 접속 성공, DB 접속 실패를 알 수 있다.
 
 ## [주문하기 버튼]
 ``` java
@@ -239,5 +272,12 @@ to_char을 쓴 이유는 DB에 저장되는 값은 시, 분, 초 이므로 to_ch
 - 두번째는 부등호를 사용한 조건식이다.
 - 주문일시가 ?보다 크거나 같거나 그리고 주문일시가 ?보다 작거나 같은 경우이다.
 - DB에 저장된 값은 몇시 몇분 몇초 이기 때문에 당일은 잡히지 않는다 따라서 1일을 더해줌으로써 조회가 가능하게 된다. 
+
+## [SQL Developer]
+![image](https://github.com/seokhyun06/Kiosk/assets/122009563/4377ca25-8d8a-4b41-9971-f12756219c55)
+
+
+
+
 
 
